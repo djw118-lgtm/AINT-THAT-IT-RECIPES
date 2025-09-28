@@ -138,3 +138,284 @@ SECTION 2 - Paste this starting at line 75:
             {id:70,name:"Spicy Maple",method:"Baked",time:"35m",diff:"Easy",ing:["Drumsticks","Maple syrup","Red pepper flakes","Garlic","Soy sauce"],ins:"Coat with spicy maple glaze. Bake 400°F 35min."}
         ];
       
+        const veganRecipes = [
+            {id:101,name:"Crispy Tofu Nuggets",method:"Fried",time:"35m",diff:"Easy",ing:["Extra-firm tofu","Cornstarch","Breadcrumbs","Poultry seasoning","Nutritional yeast"],ins:"Press tofu 30min. Cube. Coat cornstarch, then breadcrumb mix. Fry golden."},
+            {id:102,name:"BBQ Jackfruit",method:"Slow-Cooked",time:"3hr",diff:"Easy",ing:["Young jackfruit","BBQ sauce","Onion","Garlic","Smoked paprika"],ins:"Drain jackfruit. Slow cook with BBQ sauce 3hr. Shred with fork."},
+            {id:103,name:"Seitan Buffalo Wings",method:"Baked",time:"40m",diff:"Med",ing:["Seitan","Buffalo sauce","Vegan butter","Garlic powder"],ins:"Cut seitan into strips. Bake 400°F 20min. Toss in buffalo-butter sauce."},
+            {id:104,name:"Chickpea Salad",method:"No-Cook",time:"15m",diff:"Easy",ing:["Chickpeas","Vegan mayo","Celery","Dill","Dijon mustard"],ins:"Mash chickpeas. Mix with mayo, celery, dill, mustard. Chill."},
+            {id:105,name:"Cauliflower Wings",method:"Baked",time:"35m",diff:"Easy",ing:["Cauliflower","Flour","Plant milk","Hot sauce","Breadcrumbs"],ins:"Coat cauliflower in batter, then breadcrumbs. Bake 425°F 25min. Toss sauce."},
+            {id:106,name:"Lemon Herb Tofu",method:"Grilled",time:"30m",diff:"Easy",ing:["Firm tofu","Lemon","Herbs","Olive oil","Garlic"],ins:"Press tofu. Marinate lemon-herb 1hr. Grill 4min per side."},
+            {id:107,name:"Kung Pao Soy Curls",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Soy curls","Peanuts","Dried chilis","Soy sauce","Rice vinegar"],ins:"Rehydrate soy curls. Stir-fry with chilis-peanuts. Add kung pao sauce."},
+            {id:108,name:"Mushroom Fried Cutlets",method:"Fried",time:"30m",diff:"Med",ing:["Oyster mushrooms","Flour","Plant milk","Breadcrumbs","Poultry seasoning"],ins:"Tear mushrooms into strips. Flour-milk-breadcrumb. Fry golden."},
+            {id:109,name:"Coconut Curry Tofu",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tofu","Coconut milk","Curry paste","Lime","Cilantro"],ins:"Fry tofu crispy. Simmer curry sauce. Add tofu. Garnish cilantro-lime."},
+            {id:110,name:"Teriyaki Tempeh",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Tempeh","Teriyaki sauce","Ginger","Garlic","Sesame seeds"],ins:"Steam tempeh 10min. Pan-fry. Add teriyaki-ginger-garlic. Top sesame."},
+            {id:111,name:"Nashville Hot Cauliflower",method:"Fried",time:"40m",diff:"Med",ing:["Cauliflower","Hot sauce","Cayenne","Brown sugar","Pickle juice"],ins:"Batter and fry cauliflower. Toss in Nashville hot oil-spice mix."},
+            {id:112,name:"Seitan Marsala",method:"Pan-Fried",time:"35m",diff:"Med",ing:["Seitan","Mushrooms","Marsala wine","Vegan cream","Thyme"],ins:"Sear seitan. Sauté mushrooms. Deglaze marsala. Add cream."},
+            {id:113,name:"Orange Tofu",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tofu","Orange juice","Soy sauce","Ginger","Cornstarch"],ins:"Fry tofu crispy. Make orange sauce. Toss together."},
+            {id:114,name:"Jerk Jackfruit",method:"Grilled",time:"35m",diff:"Med",ing:["Jackfruit","Jerk seasoning","Allspice","Scotch bonnet","Thyme"],ins:"Marinate jackfruit in jerk spices. Grill until charred."},
+            {id:115,name:"Butter Chickpeas",method:"Braised",time:"35m",diff:"Med",ing:["Chickpeas","Tomato","Coconut cream","Garam masala","Vegan butter"],ins:"Sauté spices in butter. Add tomato-cream. Simmer chickpeas 20min."},
+            {id:116,name:"Lemon Pepper Tofu",method:"Air-Fried",time:"25m",diff:"Easy",ing:["Tofu","Lemon zest","Black pepper","Garlic powder","Olive oil"],ins:"Press tofu. Season. Air fry 400°F 15min."},
+            {id:117,name:"Sweet & Sour Tempeh",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tempeh","Pineapple","Bell pepper","Sweet & sour sauce"],ins:"Fry tempeh crispy. Stir-fry veggies-pineapple. Add sauce."},
+            {id:118,name:"Garlic Parmesan Mushrooms",method:"Baked",time:"30m",diff:"Easy",ing:["King oyster mushrooms","Vegan parmesan","Garlic","Vegan butter","Parsley"],ins:"Score mushrooms. Bake. Toss garlic-parm butter."},
+            {id:119,name:"Chimichurri Seitan",method:"Grilled",time:"30m",diff:"Med",ing:["Seitan","Parsley","Cilantro","Garlic","Red wine vinegar","Olive oil"],ins:"Grill seitan. Blend chimichurri. Top generously."},
+            {id:120,name:"Peanut Tofu Noodles",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Tofu","Peanut butter","Chili paste","Soy sauce","Rice noodles"],ins:"Fry tofu. Cook noodles. Make peanut sauce. Toss all."},
+            {id:121,name:"Honey Mustard Cauliflower",method:"Baked",time:"35m",diff:"Easy",ing:["Cauliflower","Maple syrup","Dijon mustard","Garlic","Paprika"],ins:"Coat cauliflower honey-mustard. Bake 400°F 30min."},
+            {id:122,name:"General Tso's Tofu",method:"Fried",time:"35m",diff:"Med",ing:["Tofu","Cornstarch","Soy sauce","Sugar","Dried chilis","Ginger"],ins:"Coat tofu cornstarch. Fry. Toss General Tso's sauce."},
+            {id:123,name:"Sesame Ginger Tempeh",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Tempeh","Sesame oil","Ginger","Soy sauce","Maple syrup","Sesame seeds"],ins:"Pan-fry tempeh. Glaze sesame-ginger sauce. Top seeds."},
+            {id:124,name:"Cajun Soy Curls",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Soy curls","Cajun seasoning","Paprika","Garlic","Onion"],ins:"Rehydrate soy curls. Fry with Cajun spices. Add peppers-onions."},
+            {id:125,name:"Maple Mustard Tofu",method:"Baked",time:"35m",diff:"Easy",ing:["Tofu","Maple syrup","Dijon","Apple cider vinegar"],ins:"Press tofu. Coat maple-mustard. Bake 375°F 30min."}
+        ];
+
+        // Combine arrays based on selected type
+        const recipes = recipeType === 'chicken' ? chickenRecipes : veganRecipes;
+        
+        const methods = ['All', ...new Set(recipes.map(r => r.method))];
+        
+        const filtered = recipes.filter(r => 
+            (filterMethod === 'All' || r.method === filterMethod) &&
+            r.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 p-4">
+                <div className="max-w-6xl mx-auto">
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <div className="flex items-center justify-center gap-3 mb-2">
+                            <ChefHat className="w-12 h-12 text-orange-600" />
+                            <h1 className="text-4xl font-bold text-gray-800">Recipe Collection</h1>
+                        </div>
+                        <p className="text-gray-600">Delicious recipes for every taste</p>
+                    </div>
+
+                    {/* Type Toggle */}
+                    <div className="flex justify-center gap-4 mb-6">
+                        <button
+                            onClick={() => {setRecipeType('chicken'); setFilterMethod('All');}}
+                            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                                recipeType === 'chicken' 
+                                    ? 'bg-orange-600 text-white shadow-lg' 
+                                    : 'bg-white text-gray-700 hover:bg-orange-100'
+                            }`}
+                        >
+                            Chicken Recipes
+                        </button>
+                        <button
+                            onClick={() => {setRecipeType('vegan'); setFilterMethod('All');}}
+                            className={`px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+                                recipeType === 'vegan' 
+                                    ? 'bg-green-600 text-white shadow-lg' 
+                                    : 'bg-white text-gray-700 hover:bg-green-100'
+                            }`}
+                        >
+                            <Leaf className="w-5 h-5" />
+                            Vegan "Chicken"
+                        </button>
+                    </div>
+
+                    {/* Search & Filter */}
+                    <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <div className="flex-1 relative">
+                                <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search recipes..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                />
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Filter className="w-5 h-5 text-gray-600" />
+                                <select
+                                    value={filterMethod}
+                                    onChange={(e) => setFilterMethod(e.target.value)}
+                                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                >
+                                    {methods.map(m => (
+                                        <option key={m} value={m}>{m}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Recipe Grid */}
+                    {selectedRecipe ? (
+                        <div className="bg-white rounded-lg shadow-xl p-6">
+                            <button
+                                onClick={() => setSelectedRecipe(null)}
+                                className="mb-4 text-orange-600 hover:text-orange-700 font-semibold"
+                            >
+                                ← Back to recipes
+                            </button>
+                            <h2 className="text-3xl font-bold text-gray-800 mb-4">{selectedRecipe.name}</h2>
+                            <div className="flex flex-wrap gap-4 mb-6">
+                                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
+                                    {selectedRecipe.method}
+                                </span>
+                                <span className="flex items-center gap-1 text-gray-600">
+                                    <Clock className="w-4 h-4" />
+                                    {selectedRecipe.time}
+                                </span>
+                                <span className="flex items-center gap-1 text-gray-600">
+                                    <Flame className="w-4 h-4" />
+                                    {selectedRecipe.difficulty}
+                                </span>
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="text-xl font-bold text-gray-800 mb-3">Ingredients</h3>
+                                <ul className="space-y-2">
+                                    {selectedRecipe.ingredients.map((ing, i) => (
+                                        <li key={i} className="flex items-start gap-2">
+                                            <span className="text-orange-600 mt-1">•</span>
+                                            <span className="text-gray-700">{ing}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-3">Instructions</h3>
+                                <p className="text-gray-700 leading-relaxed">{selectedRecipe.instructions}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {filtered.map(recipe => (
+                                <div
+                                    key={recipe.id}
+                                    onClick={() => setSelectedRecipe(recipe)}
+                                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all cursor-pointer p-4 border-2 border-transparent hover:border-orange-500"
+                                >
+                                    <h3 className="text-lg font-bold text-gray-800 mb-2">{recipe.name}</h3>
+                                    <div className="flex flex-wrap gap-2 mb-3">
+                                        <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">
+                                            {recipe.method}
+                                        </span>
+                                        <span className="flex items-center gap-1 text-gray-600 text-xs">
+                                            <Clock className="w-3 h-3" />
+                                            {recipe.time}
+                                        </span>
+                                        <span className="flex items-center gap-1 text-gray-600 text-xs">
+                                            <Flame className="w-3 h-3" />
+                                            {recipe.difficulty}
+                                        </span>
+                                    </div>
+                                    <p className="text-sm text-gray-600 line-clamp-2">{recipe.instructions}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+        let currentType = 'chicken';
+        let currentFilter = 'All';
+        let currentRecipes = chickenRecipes;
+
+        function switchType(type) {
+            currentType = type;
+            currentRecipes = type === 'chicken' ? chickenRecipes : veganRecipes;
+            currentFilter = 'All';
+            
+            const chickenBtn = document.getElementById('chickenBtn');
+            const veganBtn = document.getElementById('veganBtn');
+            
+            if(type === 'chicken') {
+                chickenBtn.className = 'px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 bg-orange-500 text-white shadow-lg';
+                veganBtn.className = 'px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 bg-white text-gray-700 hover:bg-green-100';
+            } else {
+                veganBtn.className = 'px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 bg-green-500 text-white shadow-lg';
+                chickenBtn.className = 'px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 bg-white text-gray-700 hover:bg-orange-100';
+            }
+            
+            renderFilters();
+            filterRecipes();
+        }
+
+        function renderFilters() {
+            const methods = ['All', ...new Set(currentRecipes.map(r => r.method))];
+            const container = document.getElementById('filterButtons');
+            container.innerHTML = methods.map(method => `
+                <button onclick="setFilter('${method}')" class="px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                    currentFilter === method 
+                        ? (currentType === 'chicken' ? 'bg-orange-500 text-white' : 'bg-green-500 text-white')
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                }">${method}</button>
+            `).join('');
+        }
+
+        function setFilter(method) {
+            currentFilter = method;
+            renderFilters();
+            filterRecipes();
+        }
+
+        function filterRecipes() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = currentRecipes.filter(r => {
+                const matchesSearch = r.name.toLowerCase().includes(search) || r.method.toLowerCase().includes(search);
+                const matchesFilter = currentFilter === 'All' || r.method === currentFilter;
+                return matchesSearch && matchesFilter;
+            });
+            renderRecipes(filtered);
+        }
+
+        function renderRecipes(recipes) {
+            const grid = document.getElementById('recipeGrid');
+            if(recipes.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-gray-500 text-lg">No recipes found. Try a different search or filter!</p></div>';
+                return;
+            }
+            grid.innerHTML = recipes.map(r => `
+                <div onclick="openModal(${r.id})" class="recipe-card bg-white rounded-xl shadow-md cursor-pointer p-6 border-2 border-transparent hover:border-${currentType === 'chicken' ? 'orange' : 'green'}-300">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-xl font-bold text-gray-800">${r.name}</h3>
+                        <span class="text-orange-500">🔥</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-${currentType === 'chicken' ? 'orange' : 'green'}-100 text-${currentType === 'chicken' ? 'orange' : 'green'}-700">
+                            ${r.method}
+                        </div>
+                        <div class="flex items-center gap-4 text-sm text-gray-600">
+                            <span>⏱️ ${r.time}</span>
+                            <span>•</span>
+                            <span>${r.diff}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal(id) {
+            const recipe = currentRecipes.find(r => r.id === id);
+            if(!recipe) return;
+            
+            document.getElementById('modalTitle').textContent = recipe.name;
+            document.getElementById('modalMethod').textContent = recipe.method;
+            document.getElementById('modalMethod').className = `px-3 py-1 rounded-full font-medium bg-${currentType === 'chicken' ? 'orange' : 'green'}-100 text-${currentType === 'chicken' ? 'orange' : 'green'}-700`;
+            document.getElementById('modalTime').textContent = '⏱️ ' + recipe.time;
+            document.getElementById('modalDiff').textContent = recipe.diff;
+            document.getElementById('modalIngredients').innerHTML = recipe.ing.map(i => `
+                <li class="flex items-center gap-2 text-gray-700">
+                    <span class="w-2 h-2 bg-orange-400 rounded-full"></span>${i}
+                </li>
+            `).join('');
+            document.getElementById('modalInstructions').textContent = recipe.ins;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if(!event || event.target.id === 'modal') {
+                document.getElementById('modal').classList.remove('active');
+            }
+        }
+
+        // Initialize
+        renderFilters();
+        filterRecipes();
+    </script>
+</body>
+</html>
