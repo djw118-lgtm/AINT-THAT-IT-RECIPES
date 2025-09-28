@@ -31,9 +31,7 @@
             </button>
         </div>
         <div class="mb-6">
-            <div class="relative">
-                <input type="text" id="searchInput" placeholder="Search by name or cooking method..." class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 focus:outline-none" oninput="filterRecipes()">
-            </div>
+            <input type="text" id="searchInput" placeholder="Search by name or cooking method..." class="w-full pl-4 pr-4 py-3 rounded-xl border-2 border-orange-200 focus:border-orange-400 focus:outline-none" oninput="filterRecipes()">
         </div>
         <div id="filterButtons" class="flex items-center gap-2 overflow-x-auto pb-2 mb-6"></div>
         <div id="recipeGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -61,263 +59,29 @@
     </div>
 
     <script>
-        const chickenRecipes = [
-            {id:1,name:"Honey Sriracha Fried",method:"Fried",time:"35m",diff:"Med",ing:["Chicken thighs","Buttermilk","Flour","Honey","Sriracha"],ins:"Marinate in buttermilk 2hr. Coat in seasoned flour, fry golden. Toss with honey-sriracha glaze."},
-            {id:2,name:"Lemon Herb Grilled",method:"Grilled",time:"25m",diff:"Easy",ing:["Chicken breasts","Olive oil","Lemons","Rosemary","Garlic"],ins:"Marinate in oil, lemon, herbs 30min. Grill 6-7min per side."},
-            {id:3,name:"Tuscan Slow Cooker",method:"Slow Cooked",time:"4hr",diff:"Easy",ing:["Breasts","Sun-dried tomatoes","Spinach","Heavy cream","Garlic"],ins:"Add chicken, garlic, tomatoes to slow cooker. Cook low 4hr. Add cream, spinach last 30min."},
-            {id:4,name:"Miso Glazed Baked",method:"Baked",time:"40m",diff:"Easy",ing:["Chicken legs","Miso paste","Mirin","Soy sauce","Honey"],ins:"Mix miso, mirin, soy, honey. Coat chicken, bake 400°F 35-40min."},
-            {id:5,name:"Coconut Curry",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken thighs","Coconut milk","Curry paste","Bell peppers","Basil"],ins:"Sear chicken. Sauté veggies. Add curry, coconut milk, chicken. Simmer 15min."},
-            {id:6,name:"Smoked BBQ",method:"Smoked",time:"3hr",diff:"Hard",ing:["Whole chicken","Smoked paprika","BBQ rub","Wood chips","BBQ sauce"],ins:"Rub with spices. Smoke 225°F 2.5-3hr. Brush sauce last 30min."},
-            {id:7,name:"Gochujang Wings",method:"Air Fried",time:"28m",diff:"Easy",ing:["Chicken wings","Gochujang","Soy sauce","Honey","Sesame oil"],ins:"Air fry 400°F 25min, flipping halfway. Toss with gochujang sauce."},
-            {id:8,name:"Tandoori Roasted",method:"Roasted",time:"45m",diff:"Med",ing:["Chicken quarters","Greek yogurt","Tandoori spice","Ginger paste","Lemon"],ins:"Marinate in yogurt-spices 2hr. Roast 425°F 40-45min."},
-            {id:9,name:"Ginger Scallion Poached",method:"Poached",time:"50m",diff:"Easy",ing:["Chicken breasts","Chicken stock","Ginger","Scallions","Oil"],ins:"Poach in stock with ginger 40min. Rest 10min. Top with scallion-ginger oil."},
-            {id:10,name:"Braised with Olives",method:"Braised",time:"75m",diff:"Med",ing:["Chicken thighs","White wine","Artichokes","Olives","Stock"],ins:"Sear chicken. Deglaze with wine. Add stock, olives, artichokes. Braise 45min."},
-          Paste it RIGHT on line 75 - NO SPACE needed.
-The code flows continuously. Just put your cursor at the end of line 74 and paste Section 2 starting on line 75.
-Ready for Section 2? Here it comes:
-SECTION 2 - Paste this starting at line 75:
-{id:11,name:"Nashville Hot Tenders",method:"Fried",time:"40m",diff:"Med",ing:["Chicken tenders","Buttermilk","Spiced flour","Cayenne oil","Pickles"],ins:"Soak in buttermilk. Dredge, fry crispy. Brush with cayenne oil."},
-            {id:12,name:"Jamaican Jerk",method:"Grilled",time:"35m",diff:"Med",ing:["Drumsticks","Jerk seasoning","Scotch bonnets","Allspice","Lime"],ins:"Marinate 4hr. Grill until charred and cooked through."},
-            {id:13,name:"Salsa Verde Pressure",method:"Pressure Cooked",time:"25m",diff:"Easy",ing:["Chicken breasts","Salsa verde","Onion","Black beans","Cumin"],ins:"Pressure cook 15min. Quick release, shred and stir."},
-            {id:14,name:"Maple Dijon Sheet Pan",method:"Baked",time:"35m",diff:"Easy",ing:["Chicken breasts","Maple syrup","Dijon","Brussels sprouts","Sweet potatoes"],ins:"Coat with maple-Dijon. Add veggies. Bake 425°F 30-35min."},
-            {id:15,name:"Szechuan Stir-Fry",method:"Stir-Fried",time:"20m",diff:"Easy",ing:["Chicken breast","Szechuan peppercorns","Dried chilies","Soy sauce","Bell peppers"],ins:"Toast peppercorns. Stir-fry chicken, add veggies and sauce."},
-            {id:16,name:"Pecan Crusted",method:"Pan-Fried",time:"25m",diff:"Med",ing:["Chicken cutlets","Pecans","Panko","Eggs","Butter"],ins:"Pound thin. Flour, egg, pecan-panko coat. Pan-fry in butter."},
-            {id:17,name:"Tea Smoked",method:"Smoked",time:"60m",diff:"Hard",ing:["Chicken breasts","Black tea","Brown sugar","Rice","Five-spice"],ins:"Line wok with foil. Tea-sugar-rice mix. Smoke chicken 45min."},
-            {id:18,name:"Lemon Pepper Air Fried",method:"Air Fried",time:"30m",diff:"Easy",ing:["Drumsticks","Lemon pepper","Olive oil","Lemon zest","Parsley"],ins:"Toss with oil and seasonings. Air fry 380°F 25-30min."},
-            {id:19,name:"Harissa Roasted",method:"Roasted",time:"50m",diff:"Easy",ing:["Chicken thighs","Harissa paste","Greek yogurt","Honey","Mint"],ins:"Coat in harissa-yogurt. Marinate 1hr. Roast 425°F 45min."},
-            {id:20,name:"Vietnamese Caramel",method:"Pan-Fried",time:"35m",diff:"Med",ing:["Chicken thighs","Brown sugar","Fish sauce","Ginger","Garlic"],ins:"Caramelize sugar. Add chicken, fish sauce, aromatics. Simmer 25min."},
-            {id:21,name:"Orange Sesame",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken breast","Orange juice","Soy sauce","Honey","Sesame"],ins:"Coat in cornstarch. Fry. Make orange sauce. Toss together."},
-            {id:22,name:"Garlic Butter Baked",method:"Baked",time:"35m",diff:"Easy",ing:["Chicken breasts","Butter","Garlic","Parsley","Parmesan"],ins:"Top with garlic butter. Bake 375°F 30min. Garnish parsley, parmesan."},
-            {id:23,name:"Thai Basil",method:"Stir-Fried",time:"22m",diff:"Easy",ing:["Ground chicken","Thai basil","Chili","Fish sauce","Garlic"],ins:"Brown chicken. Add garlic, chili, sauce. Toss basil off heat."},
-            {id:24,name:"Pesto Stuffed",method:"Baked",time:"40m",diff:"Med",ing:["Chicken breasts","Pesto","Mozzarella","Sun-dried tomatoes"],ins:"Butterfly breasts. Stuff pesto, cheese, tomato. Bake 375°F 35min."},
-            {id:25,name:"Cajun Blackened",method:"Pan-Fried",time:"20m",diff:"Easy",ing:["Chicken breasts","Cajun spice","Paprika","Garlic powder","Butter"],ins:"Coat heavy with cajun spice. Pan sear high heat 4-5min per side."},
-            {id:26,name:"Teriyaki Bowl",method:"Stir-Fried",time:"25m",diff:"Easy",ing:["Chicken thighs","Teriyaki sauce","Broccoli","Carrots","Sesame"],ins:"Stir-fry chicken. Add veggies, teriyaki. Serve over rice with sesame."},
-            {id:27,name:"Honey Mustard Baked",method:"Baked",time:"35m",diff:"Easy",ing:["Chicken thighs","Honey","Dijon mustard","Garlic","Rosemary"],ins:"Mix honey, mustard, garlic. Coat chicken. Bake 400°F 30-35min."},
-            {id:28,name:"Fajita Sheet Pan",method:"Baked",time:"30m",diff:"Easy",ing:["Chicken breast","Bell peppers","Onions","Fajita seasoning","Lime"],ins:"Toss chicken, veggies, seasoning. Bake 425°F 25min."},
-            {id:29,name:"Parmesan Crusted",method:"Baked",time:"30m",diff:"Easy",ing:["Chicken breasts","Parmesan","Mayo","Breadcrumbs","Garlic powder"],ins:"Mix parmesan, mayo, breadcrumbs. Coat chicken. Bake 400°F 25min."},
-            {id:30,name:"Lemon Piccata",method:"Pan-Fried",time:"25m",diff:"Med",ing:["Chicken cutlets","Flour","Butter","Lemon","Capers"],ins:"Dredge in flour. Pan-fry. Make lemon-caper-wine sauce."},
-            {id:31,name:"Buffalo Ranch Wrap",method:"Pan-Fried",time:"20m",diff:"Easy",ing:["Chicken tenders","Buffalo sauce","Ranch","Lettuce","Tomato"],ins:"Cook tenders. Toss in buffalo sauce. Wrap with veggies and ranch."},
-            {id:32,name:"Butter Chicken",method:"Pan-Fried",time:"40m",diff:"Med",ing:["Chicken thighs","Butter","Tomato sauce","Cream","Garam masala"],ins:"Sear chicken. Simmer in tomato-cream-spice sauce 30min."},
-            {id:33,name:"Greek Lemon Potatoes",method:"Roasted",time:"60m",diff:"Easy",ing:["Chicken thighs","Potatoes","Lemon","Oregano","Broth"],ins:"Arrange chicken and potatoes. Add lemon, oregano, broth. Roast 425°F 50min."},
-            {id:34,name:"Sweet Chili Glazed",method:"Baked",time:"35m",diff:"Easy",ing:["Drumsticks","Sweet chili sauce","Lime","Garlic","Cilantro"],ins:"Coat with sweet chili. Bake 400°F 35min basting. Garnish cilantro."},
-            {id:35,name:"Firecracker",method:"Baked",time:"35m",diff:"Med",ing:["Chicken breasts","Hot sauce","Honey","Apple cider vinegar","Red pepper"],ins:"Mix firecracker sauce. Coat chicken. Bake 375°F 30min."},
-            {id:36,name:"Kung Pao",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Chicken breast","Peanuts","Dried chili","Soy sauce","Rice vinegar"],ins:"Velvet chicken. Stir-fry chili and peanuts. Add chicken and sauce."},
-            {id:37,name:"Caprese Stuffed",method:"Baked",time:"40m",diff:"Med",ing:["Chicken breasts","Mozzarella","Tomato slices","Basil","Balsamic"],ins:"Butterfly. Stuff with mozz, tomato, basil. Bake 375°F. Drizzle balsamic."},
-            {id:38,name:"Mongolian",method:"Stir-Fried",time:"25m",diff:"Easy",ing:["Chicken thighs","Soy sauce","Hoisin","Brown sugar","Scallions"],ins:"Fry chicken crispy. Make mongolian sauce. Toss with scallions."},
-            {id:39,name:"Ranch Packet Slow Cooker",method:"Slow Cooked",time:"4hr",diff:"Easy",ing:["Chicken breasts","Ranch packet","Cream cheese","Cream of chicken"],ins:"Add all to slow cooker. Cook low 4hr. Shred chicken."},
-            {id:40,name:"Apple Cider Braised",method:"Braised",time:"60m",diff:"Med",ing:["Chicken thighs","Apple cider","Apples","Onion","Thyme"],ins:"Sear chicken. Add cider, apples, onion, thyme. Braise 45min."},
-            {id:41,name:"Cilantro Lime",method:"Grilled",time:"25m",diff:"Easy",ing:["Chicken breasts","Lime juice","Cilantro","Garlic","Cumin"],ins:"Marinate in lime-cilantro mix 1hr. Grill 6-7min per side."},
-            {id:42,name:"Katsu",method:"Fried",time:"30m",diff:"Med",ing:["Chicken breasts","Panko","Flour","Eggs","Tonkatsu sauce"],ins:"Pound thin. Flour, egg, panko. Fry golden. Serve with tonkatsu sauce."},
-            {id:43,name:"White Wine Mushroom",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken breasts","Mushrooms","White wine","Cream","Garlic"],ins:"Sear chicken. Sauté mushrooms and garlic. Deglaze with wine. Add cream."},
-            {id:44,name:"Balsamic Glazed",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Chicken breasts","Balsamic vinegar","Honey","Garlic","Rosemary"],ins:"Sear chicken. Make balsamic-honey reduction. Coat chicken."},
-            {id:45,name:"Greek Yogurt Marinated",method:"Grilled",time:"30m",diff:"Easy",ing:["Chicken thighs","Greek yogurt","Lemon","Dill","Cucumber"],ins:"Marinate in yogurt-herb mix 2hr. Grill. Serve with tzatziki."},
-            {id:46,name:"General Tso's",method:"Fried",time:"35m",diff:"Med",ing:["Chicken breast","Cornstarch","Soy sauce","Rice vinegar","Sugar"],ins:"Coat in cornstarch. Fry crispy. Make General Tso sauce. Toss together."},
-            {id:47,name:"Spinach Artichoke Stuffed",method:"Baked",time:"45m",diff:"Med",ing:["Chicken breasts","Spinach","Artichoke","Cream cheese","Mozzarella"],ins:"Mix spinach-artichoke filling. Stuff chicken. Bake 375°F 40min."},
-            {id:48,name:"Korean Fried",method:"Fried",time:"45m",diff:"Hard",ing:["Chicken wings","Potato starch","Gochugaru","Soy sauce","Garlic"],ins:"Double fry wings. Toss in Korean sauce. Garnish with sesame seeds."},
-            {id:49,name:"Dijon Tarragon",method:"Pan-Fried",time:"25m",diff:"Med",ing:["Chicken breasts","Dijon mustard","Tarragon","White wine","Cream"],ins:"Sear chicken. Make dijon-tarragon cream sauce."},
-            {id:50,name:"Pineapple Teriyaki",method:"Grilled",time:"30m",diff:"Easy",ing:["Chicken thighs","Pineapple","Teriyaki sauce","Ginger","Garlic"],ins:"Marinate chicken. Grill with pineapple slices."},
-            {id:51,name:"Creamy Tuscan",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken breasts","Sun-dried tomato","Spinach","Cream","Parmesan"],ins:"Sear chicken. Add garlic, tomato, cream, spinach, parmesan. Simmer."},
-            {id:52,name:"BBQ Bacon Wrapped",method:"Baked",time:"40m",diff:"Med",ing:["Chicken tenders","Bacon","BBQ sauce","Brown sugar"],ins:"Wrap tenders in bacon. Brush with BBQ. Bake 375°F 35min."},
-            {id:53,name:"Lemon Rosemary",method:"Roasted",time:"50m",diff:"Easy",ing:["Whole chicken","Lemon","Rosemary","Garlic","Butter"],ins:"Stuff with lemon and rosemary. Roast 425°F 45min."},
-            {id:54,name:"Sesame Ginger",method:"Stir-Fried",time:"22m",diff:"Easy",ing:["Chicken breast","Sesame oil","Ginger","Soy sauce","Honey"],ins:"Velvet chicken. Stir-fry with ginger. Add sesame sauce."},
-            {id:55,name:"Chipotle Lime",method:"Grilled",time:"25m",diff:"Easy",ing:["Chicken breasts","Chipotle peppers","Lime","Honey","Garlic"],ins:"Marinate in chipotle-lime sauce. Grill 7min per side."},
-            {id:56,name:"Paprika Cream",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken thighs","Paprika","Sour cream","Onion","Broth"],ins:"Sear chicken. Make paprika-cream sauce with onions."},
-            {id:57,name:"Apricot Glazed",method:"Baked",time:"40m",diff:"Easy",ing:["Drumsticks","Apricot jam","Soy sauce","Garlic","Ginger"],ins:"Coat with apricot glaze. Bake 400°F 35min."},
-            {id:58,name:"Bourbon Glazed",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken breasts","Bourbon","Brown sugar","Soy sauce","Garlic"],ins:"Sear chicken. Make bourbon-sugar glaze. Coat and simmer."},
-            {id:59,name:"Cilantro Lime Rice Bowl",method:"Pan-Fried",time:"30m",diff:"Easy",ing:["Chicken thighs","Cilantro","Lime","Rice","Black beans"],ins:"Cook chicken. Serve over cilantro-lime rice with beans."},
-            {id:60,name:"Mushroom Marsala",method:"Pan-Fried",time:"35m",diff:"Med",ing:["Chicken cutlets","Mushrooms","Marsala wine","Cream","Butter"],ins:"Sear cutlets. Sauté mushrooms. Deglaze with marsala. Add cream."},
-            {id:61,name:"Garlic Parmesan Wings",method:"Baked",time:"35m",diff:"Easy",ing:["Chicken wings","Garlic","Parmesan","Butter","Parsley"],ins:"Bake wings at 425°F. Toss in garlic-parmesan butter."},
-            {id:62,name:"Sriracha Honey Lime",method:"Grilled",time:"25m",diff:"Easy",ing:["Chicken breasts","Sriracha","Honey","Lime","Garlic"],ins:"Marinate chicken. Grill and brush with sriracha-honey glaze."},
-            {id:63,name:"Creamy Pesto",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Chicken breasts","Pesto","Heavy cream","Parmesan","Pine nuts"],ins:"Sear chicken. Make creamy pesto sauce. Coat and serve."},
-            {id:64,name:"Mango Habanero",method:"Grilled",time:"30m",diff:"Med",ing:["Chicken thighs","Mango","Habanero","Lime","Cilantro"],ins:"Marinate in mango-habanero sauce. Grill until charred."},
-            {id:65,name:"Rosemary Lemon Butter",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Chicken cutlets","Rosemary","Lemon","Butter","White wine"],ins:"Sear cutlets. Make rosemary-lemon butter sauce."},
-            {id:66,name:"Spicy Peanut Noodles",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Chicken breast","Peanut butter","Chili paste","Soy sauce","Noodles"],ins:"Cook noodles. Stir-fry chicken. Mix peanut sauce. Toss all together."},
-            {id:67,name:"Garlic Herb Butter",method:"Baked",time:"35m",diff:"Easy",ing:["Chicken thighs","Butter","Garlic","Herbs","Lemon"],ins:"Top with herb butter. Bake 400°F 30min."},
-            {id:68,name:"Sweet & Sour",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Chicken breast","Pineapple","Bell peppers","Sweet & sour sauce"],ins:"Fry chicken crispy. Stir-fry with pineapple and sauce."},
-            {id:69,name:"Lemon Dill",method:"Baked",time:"30m",diff:"Easy",ing:["Chicken breasts","Lemon","Dill","Butter","White wine"],ins:"Top with lemon-dill butter. Bake 375°F 25min."},
-            {id:70,name:"Spicy Maple",method:"Baked",time:"35m",diff:"Easy",ing:["Drumsticks","Maple syrup","Red pepper flakes","Garlic","Soy sauce"],ins:"Coat with spicy maple glaze. Bake 400°F 35min."}
-        ];
-      
-        const veganRecipes = [
-            {id:101,name:"Crispy Tofu Nuggets",method:"Fried",time:"35m",diff:"Easy",ing:["Extra-firm tofu","Cornstarch","Breadcrumbs","Poultry seasoning","Nutritional yeast"],ins:"Press tofu 30min. Cube. Coat cornstarch, then breadcrumb mix. Fry golden."},
-            {id:102,name:"BBQ Jackfruit",method:"Slow-Cooked",time:"3hr",diff:"Easy",ing:["Young jackfruit","BBQ sauce","Onion","Garlic","Smoked paprika"],ins:"Drain jackfruit. Slow cook with BBQ sauce 3hr. Shred with fork."},
-            {id:103,name:"Seitan Buffalo Wings",method:"Baked",time:"40m",diff:"Med",ing:["Seitan","Buffalo sauce","Vegan butter","Garlic powder"],ins:"Cut seitan into strips. Bake 400°F 20min. Toss in buffalo-butter sauce."},
-            {id:104,name:"Chickpea Salad",method:"No-Cook",time:"15m",diff:"Easy",ing:["Chickpeas","Vegan mayo","Celery","Dill","Dijon mustard"],ins:"Mash chickpeas. Mix with mayo, celery, dill, mustard. Chill."},
-            {id:105,name:"Cauliflower Wings",method:"Baked",time:"35m",diff:"Easy",ing:["Cauliflower","Flour","Plant milk","Hot sauce","Breadcrumbs"],ins:"Coat cauliflower in batter, then breadcrumbs. Bake 425°F 25min. Toss sauce."},
-            {id:106,name:"Lemon Herb Tofu",method:"Grilled",time:"30m",diff:"Easy",ing:["Firm tofu","Lemon","Herbs","Olive oil","Garlic"],ins:"Press tofu. Marinate lemon-herb 1hr. Grill 4min per side."},
-            {id:107,name:"Kung Pao Soy Curls",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Soy curls","Peanuts","Dried chilis","Soy sauce","Rice vinegar"],ins:"Rehydrate soy curls. Stir-fry with chilis-peanuts. Add kung pao sauce."},
-            {id:108,name:"Mushroom Fried Cutlets",method:"Fried",time:"30m",diff:"Med",ing:["Oyster mushrooms","Flour","Plant milk","Breadcrumbs","Poultry seasoning"],ins:"Tear mushrooms into strips. Flour-milk-breadcrumb. Fry golden."},
-            {id:109,name:"Coconut Curry Tofu",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tofu","Coconut milk","Curry paste","Lime","Cilantro"],ins:"Fry tofu crispy. Simmer curry sauce. Add tofu. Garnish cilantro-lime."},
-            {id:110,name:"Teriyaki Tempeh",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Tempeh","Teriyaki sauce","Ginger","Garlic","Sesame seeds"],ins:"Steam tempeh 10min. Pan-fry. Add teriyaki-ginger-garlic. Top sesame."},
-            {id:111,name:"Nashville Hot Cauliflower",method:"Fried",time:"40m",diff:"Med",ing:["Cauliflower","Hot sauce","Cayenne","Brown sugar","Pickle juice"],ins:"Batter and fry cauliflower. Toss in Nashville hot oil-spice mix."},
-            {id:112,name:"Seitan Marsala",method:"Pan-Fried",time:"35m",diff:"Med",ing:["Seitan","Mushrooms","Marsala wine","Vegan cream","Thyme"],ins:"Sear seitan. Sauté mushrooms. Deglaze marsala. Add cream."},
-            {id:113,name:"Orange Tofu",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tofu","Orange juice","Soy sauce","Ginger","Cornstarch"],ins:"Fry tofu crispy. Make orange sauce. Toss together."},
-            {id:114,name:"Jerk Jackfruit",method:"Grilled",time:"35m",diff:"Med",ing:["Jackfruit","Jerk seasoning","Allspice","Scotch bonnet","Thyme"],ins:"Marinate jackfruit in jerk spices. Grill until charred."},
-            {id:115,name:"Butter Chickpeas",method:"Braised",time:"35m",diff:"Med",ing:["Chickpeas","Tomato","Coconut cream","Garam masala","Vegan butter"],ins:"Sauté spices in butter. Add tomato-cream. Simmer chickpeas 20min."},
-            {id:116,name:"Lemon Pepper Tofu",method:"Air-Fried",time:"25m",diff:"Easy",ing:["Tofu","Lemon zest","Black pepper","Garlic powder","Olive oil"],ins:"Press tofu. Season. Air fry 400°F 15min."},
-            {id:117,name:"Sweet & Sour Tempeh",method:"Pan-Fried",time:"30m",diff:"Med",ing:["Tempeh","Pineapple","Bell pepper","Sweet & sour sauce"],ins:"Fry tempeh crispy. Stir-fry veggies-pineapple. Add sauce."},
-            {id:118,name:"Garlic Parmesan Mushrooms",method:"Baked",time:"30m",diff:"Easy",ing:["King oyster mushrooms","Vegan parmesan","Garlic","Vegan butter","Parsley"],ins:"Score mushrooms. Bake. Toss garlic-parm butter."},
-            {id:119,name:"Chimichurri Seitan",method:"Grilled",time:"30m",diff:"Med",ing:["Seitan","Parsley","Cilantro","Garlic","Red wine vinegar","Olive oil"],ins:"Grill seitan. Blend chimichurri. Top generously."},
-            {id:120,name:"Peanut Tofu Noodles",method:"Stir-Fried",time:"25m",diff:"Med",ing:["Tofu","Peanut butter","Chili paste","Soy sauce","Rice noodles"],ins:"Fry tofu. Cook noodles. Make peanut sauce. Toss all."},
-            {id:121,name:"Honey Mustard Cauliflower",method:"Baked",time:"35m",diff:"Easy",ing:["Cauliflower","Maple syrup","Dijon mustard","Garlic","Paprika"],ins:"Coat cauliflower honey-mustard. Bake 400°F 30min."},
-            {id:122,name:"General Tso's Tofu",method:"Fried",time:"35m",diff:"Med",ing:["Tofu","Cornstarch","Soy sauce","Sugar","Dried chilis","Ginger"],ins:"Coat tofu cornstarch. Fry. Toss General Tso's sauce."},
-            {id:123,name:"Sesame Ginger Tempeh",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Tempeh","Sesame oil","Ginger","Soy sauce","Maple syrup","Sesame seeds"],ins:"Pan-fry tempeh. Glaze sesame-ginger sauce. Top seeds."},
-            {id:124,name:"Cajun Soy Curls",method:"Pan-Fried",time:"25m",diff:"Easy",ing:["Soy curls","Cajun seasoning","Paprika","Garlic","Onion"],ins:"Rehydrate soy curls. Fry with Cajun spices. Add peppers-onions."},
-            {id:125,name:"Maple Mustard Tofu",method:"Baked",time:"35m",diff:"Easy",ing:["Tofu","Maple syrup","Dijon","Apple cider vinegar"],ins:"Press tofu. Coat maple-mustard. Bake 375°F 30min."}
+        const chicken = [
+            {id:1,n:"Honey Sriracha Fried",m:"Fried",t:"35m",d:"Med",i:["Chicken thighs","Buttermilk","Flour","Honey","Sriracha"],s:"Marinate buttermilk 2hr. Coat flour, fry golden. Toss honey-sriracha."},
+            {id:2,n:"Lemon Herb Grilled",m:"Grilled",t:"25m",d:"Easy",i:["Breasts","Olive oil","Lemons","Rosemary","Garlic"],s:"Marinate 30min. Grill 6-7min/side."},
+            {id:3,n:"Tuscan Slow Cooker",m:"Slow Cooked",t:"4hr",d:"Easy",i:["Breasts","Sun-dried tomato","Spinach","Cream"],s:"Slow cook 4hr. Add cream last 30min."},
+            {id:4,n:"BBQ Smoked",m:"Smoked",t:"3hr",d:"Hard",i:["Whole","Paprika","BBQ rub","Wood chips"],s:"Smoke 225°F 3hr. Brush BBQ last 30min."},
+            {id:5,n:"Gochujang Wings",m:"Air Fried",t:"28m",d:"Easy",i:["Wings","Gochujang","Soy","Honey"],s:"Air fry 400°F 25min. Toss sauce."}
         ];
 
-        // Combine arrays based on selected type
-        const recipes = recipeType === 'chicken' ? chickenRecipes : veganRecipes;
-        
-        const methods = ['All', ...new Set(recipes.map(r => r.method))];
-        
-        const filtered = recipes.filter(r => 
-            (filterMethod === 'All' || r.method === filterMethod) &&
-            r.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const vegan = [
+            {id:101,n:"Crispy Tofu Nuggets",m:"Fried",t:"30m",d:"Easy",i:["Extra-firm tofu","Plant milk","Flour","Seasoning"],s:"Press tofu. Coat flour-milk. Fry golden."},
+            {id:102,n:"Seitan Skewers",m:"Grilled",t:"40m",d:"Med",i:["Seitan","Olive oil","Lemon","Herbs"],s:"Marinate 30min. Grill 3-4min/side."},
+            {id:103,n:"Jackfruit Pulled",m:"Slow Cooked",t:"3hr",d:"Easy",i:["Young jackfruit","BBQ","Liquid smoke"],s:"Shred. Slow cook 3hr."},
+            {id:104,n:"Cauliflower Wings",m:"Air Fried",t:"30m",d:"Easy",i:["Cauliflower","Batter","Buffalo sauce"],s:"Dip batter. Air fry. Toss sauce."},
+            {id:105,n:"Mushroom Stir-Fry",m:"Pan-Fried",t:"20m",d:"Easy",i:["Oyster mushrooms","Soy","Nutritional yeast"],s:"Tear. Stir-fry crispy. Add sauce."}
+        ];
 
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 p-4">
-                <div className="max-w-6xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-2">
-                            <ChefHat className="w-12 h-12 text-orange-600" />
-                            <h1 className="text-4xl font-bold text-gray-800">Recipe Collection</h1>
-                        </div>
-                        <p className="text-gray-600">Delicious recipes for every taste</p>
-                    </div>
-
-                    {/* Type Toggle */}
-                    <div className="flex justify-center gap-4 mb-6">
-                        <button
-                            onClick={() => {setRecipeType('chicken'); setFilterMethod('All');}}
-                            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                                recipeType === 'chicken' 
-                                    ? 'bg-orange-600 text-white shadow-lg' 
-                                    : 'bg-white text-gray-700 hover:bg-orange-100'
-                            }`}
-                        >
-                            Chicken Recipes
-                        </button>
-                        <button
-                            onClick={() => {setRecipeType('vegan'); setFilterMethod('All');}}
-                            className={`px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2 ${
-                                recipeType === 'vegan' 
-                                    ? 'bg-green-600 text-white shadow-lg' 
-                                    : 'bg-white text-gray-700 hover:bg-green-100'
-                            }`}
-                        >
-                            <Leaf className="w-5 h-5" />
-                            Vegan "Chicken"
-                        </button>
-                    </div>
-
-                    {/* Search & Filter */}
-                    <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-                        <div className="flex flex-col md:flex-row gap-4">
-                            <div className="flex-1 relative">
-                                <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                                <input
-                                    type="text"
-                                    placeholder="Search recipes..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                />
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Filter className="w-5 h-5 text-gray-600" />
-                                <select
-                                    value={filterMethod}
-                                    onChange={(e) => setFilterMethod(e.target.value)}
-                                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                >
-                                    {methods.map(m => (
-                                        <option key={m} value={m}>{m}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Recipe Grid */}
-                    {selectedRecipe ? (
-                        <div className="bg-white rounded-lg shadow-xl p-6">
-                            <button
-                                onClick={() => setSelectedRecipe(null)}
-                                className="mb-4 text-orange-600 hover:text-orange-700 font-semibold"
-                            >
-                                ← Back to recipes
-                            </button>
-                            <h2 className="text-3xl font-bold text-gray-800 mb-4">{selectedRecipe.name}</h2>
-                            <div className="flex flex-wrap gap-4 mb-6">
-                                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
-                                    {selectedRecipe.method}
-                                </span>
-                                <span className="flex items-center gap-1 text-gray-600">
-                                    <Clock className="w-4 h-4" />
-                                    {selectedRecipe.time}
-                                </span>
-                                <span className="flex items-center gap-1 text-gray-600">
-                                    <Flame className="w-4 h-4" />
-                                    {selectedRecipe.difficulty}
-                                </span>
-                            </div>
-                            <div className="mb-6">
-                                <h3 className="text-xl font-bold text-gray-800 mb-3">Ingredients</h3>
-                                <ul className="space-y-2">
-                                    {selectedRecipe.ingredients.map((ing, i) => (
-                                        <li key={i} className="flex items-start gap-2">
-                                            <span className="text-orange-600 mt-1">•</span>
-                                            <span className="text-gray-700">{ing}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-gray-800 mb-3">Instructions</h3>
-                                <p className="text-gray-700 leading-relaxed">{selectedRecipe.instructions}</p>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {filtered.map(recipe => (
-                                <div
-                                    key={recipe.id}
-                                    onClick={() => setSelectedRecipe(recipe)}
-                                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all cursor-pointer p-4 border-2 border-transparent hover:border-orange-500"
-                                >
-                                    <h3 className="text-lg font-bold text-gray-800 mb-2">{recipe.name}</h3>
-                                    <div className="flex flex-wrap gap-2 mb-3">
-                                        <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">
-                                            {recipe.method}
-                                        </span>
-                                        <span className="flex items-center gap-1 text-gray-600 text-xs">
-                                            <Clock className="w-3 h-3" />
-                                            {recipe.time}
-                                        </span>
-                                        <span className="flex items-center gap-1 text-gray-600 text-xs">
-                                            <Flame className="w-3 h-3" />
-                                            {recipe.difficulty}
-                                        </span>
-                                    </div>
-                                    <p className="text-sm text-gray-600 line-clamp-2">{recipe.instructions}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </div>
-        );
-    }
         let currentType = 'chicken';
         let currentFilter = 'All';
-        let currentRecipes = chickenRecipes;
+        let currentRecipes = chicken;
 
         function switchType(type) {
             currentType = type;
-            currentRecipes = type === 'chicken' ? chickenRecipes : veganRecipes;
+            currentRecipes = type === 'chicken' ? chicken : vegan;
             currentFilter = 'All';
             
             const chickenBtn = document.getElementById('chickenBtn');
@@ -336,7 +100,7 @@ SECTION 2 - Paste this starting at line 75:
         }
 
         function renderFilters() {
-            const methods = ['All', ...new Set(currentRecipes.map(r => r.method))];
+            const methods = ['All', ...new Set(currentRecipes.map(r => r.m))];
             const container = document.getElementById('filterButtons');
             container.innerHTML = methods.map(method => `
                 <button onclick="setFilter('${method}')" class="px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
@@ -356,8 +120,8 @@ SECTION 2 - Paste this starting at line 75:
         function filterRecipes() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const filtered = currentRecipes.filter(r => {
-                const matchesSearch = r.name.toLowerCase().includes(search) || r.method.toLowerCase().includes(search);
-                const matchesFilter = currentFilter === 'All' || r.method === currentFilter;
+                const matchesSearch = r.n.toLowerCase().includes(search) || r.m.toLowerCase().includes(search);
+                const matchesFilter = currentFilter === 'All' || r.m === currentFilter;
                 return matchesSearch && matchesFilter;
             });
             renderRecipes(filtered);
@@ -366,23 +130,23 @@ SECTION 2 - Paste this starting at line 75:
         function renderRecipes(recipes) {
             const grid = document.getElementById('recipeGrid');
             if(recipes.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-gray-500 text-lg">No recipes found. Try a different search or filter!</p></div>';
+                grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-gray-500 text-lg">No recipes found!</p></div>';
                 return;
             }
             grid.innerHTML = recipes.map(r => `
                 <div onclick="openModal(${r.id})" class="recipe-card bg-white rounded-xl shadow-md cursor-pointer p-6 border-2 border-transparent hover:border-${currentType === 'chicken' ? 'orange' : 'green'}-300">
                     <div class="flex items-start justify-between mb-3">
-                        <h3 class="text-xl font-bold text-gray-800">${r.name}</h3>
+                        <h3 class="text-xl font-bold text-gray-800">${r.n}</h3>
                         <span class="text-orange-500">🔥</span>
                     </div>
                     <div class="space-y-2">
                         <div class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-${currentType === 'chicken' ? 'orange' : 'green'}-100 text-${currentType === 'chicken' ? 'orange' : 'green'}-700">
-                            ${r.method}
+                            ${r.m}
                         </div>
                         <div class="flex items-center gap-4 text-sm text-gray-600">
-                            <span>⏱️ ${r.time}</span>
+                            <span>⏱️ ${r.t}</span>
                             <span>•</span>
-                            <span>${r.diff}</span>
+                            <span>${r.d}</span>
                         </div>
                     </div>
                 </div>
@@ -393,17 +157,17 @@ SECTION 2 - Paste this starting at line 75:
             const recipe = currentRecipes.find(r => r.id === id);
             if(!recipe) return;
             
-            document.getElementById('modalTitle').textContent = recipe.name;
-            document.getElementById('modalMethod').textContent = recipe.method;
+            document.getElementById('modalTitle').textContent = recipe.n;
+            document.getElementById('modalMethod').textContent = recipe.m;
             document.getElementById('modalMethod').className = `px-3 py-1 rounded-full font-medium bg-${currentType === 'chicken' ? 'orange' : 'green'}-100 text-${currentType === 'chicken' ? 'orange' : 'green'}-700`;
-            document.getElementById('modalTime').textContent = '⏱️ ' + recipe.time;
-            document.getElementById('modalDiff').textContent = recipe.diff;
-            document.getElementById('modalIngredients').innerHTML = recipe.ing.map(i => `
+            document.getElementById('modalTime').textContent = '⏱️ ' + recipe.t;
+            document.getElementById('modalDiff').textContent = recipe.d;
+            document.getElementById('modalIngredients').innerHTML = recipe.i.map(i => `
                 <li class="flex items-center gap-2 text-gray-700">
                     <span class="w-2 h-2 bg-orange-400 rounded-full"></span>${i}
                 </li>
             `).join('');
-            document.getElementById('modalInstructions').textContent = recipe.ins;
+            document.getElementById('modalInstructions').textContent = recipe.s;
             document.getElementById('modal').classList.add('active');
         }
 
@@ -413,7 +177,7 @@ SECTION 2 - Paste this starting at line 75:
             }
         }
 
-        // Initialize
+        // Initialize - this makes recipes show up immediately
         renderFilters();
         filterRecipes();
     </script>
